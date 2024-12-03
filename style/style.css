@@ -21,23 +21,30 @@ body {
   height: 100%;
 }
 #editor {
-  display: flex;
   height: 100%;
+  display: flex;
+  text-align: center;
 }
-#editor > div {
-  border: 3px solid grey;
-  padding: 5px;
-}
-#editor > div:first-child {
+
+#editor > div:nth-child(1) {
   flex-grow: 1;
 }
-#editor-right {
-  width: 300px;
+#editor > div {
+  padding: 5px 15px;
 }
-#footer {
-  position: absolute;
-  bottom: 2px;
+#editor > div:nth-child(2) {
+  min-width: 200px;
+  border-left: 1px solid black;
+}
+div.cols {
+  display: flex;
+  justify-content: space-between;
+}
+div.cols > div {
+  width: 49%;
   text-align: center;
-  width: 90%;
-  left: 5%;
+}
+div.cols > div input {
+  width: 80px;
+  text-align: center;
 }
