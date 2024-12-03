@@ -1,8 +1,8 @@
-div {
-  border: 1px solid black;
-}
 #header {
   color: blueviolet;
+}
+#js {
+  font-weight: bold;
 }
 #footer {
   position: absolute;
