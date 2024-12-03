@@ -32,7 +32,7 @@ body {
   flex-grow: 1;
 }
 #editor-right {
-  width: 100px;
+  width: 300px;
 }
 #footer {
   position: absolute;

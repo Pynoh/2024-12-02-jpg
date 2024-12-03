@@ -78,9 +78,61 @@
             <text x="10" y="400" style="font-size: 200px">DEMAT</text>
           </svg>
         </div>
-        <div id="editor-right">right</div>
+        <div id="editor-right">
+          <form>
+            <label for="editor-text">Texte du meme</label>
+            <br />
+            <input
+              type="text"
+              name="text"
+              id="editor-text"
+              placeholder="Entrez du texte ici"
+            />
+            <hr />
+            <label for="x-position">Position X</label>
+            <br />
+            <input type="number" name="x-position" id="x-position" />
+            <hr />
+            <label for="y-position">Position Y</label>
+            <br />
+            <input type="number" name="y-position" id="y-position" />
+            <hr />
+            <label for="font-weight">Poids de la police</label>
+            <br />
+            <input
+              type="number"
+              name="font-weight"
+              id="font-weight"
+              placeholder="100"
+            />
+            <hr />
+            <label for="font-size">Taille de la police (px)</label>
+            <br />
+            <input
+              type="number"
+              name="font-size"
+              id="font-size"
+              placeholder="12"
+            />
+            <hr />
+            <label for="color">Couleur du texte</label>
+            <br />
+            <input type="color" name="color" id="color" />
+            <hr />
+            <label for="image">Image</label>
+            <br />
+            <select name="image" id="image">
+              <option value="-1">Pas d'image</option>
+              <option value="0">Steven Universe Phone</option>
+            </select>
+            <hr />
+
+            <button type="reset">Reset</button>
+            <input type="submit" value="Valider" />
+          </form>
+        </div>
       </div>
     </div>
-    <div id="footer">Page de test créée par O. MAHIEU</div>
+    <div id="footer">Meme generator créé par O. MAHIEU</div>
   </body>
 </html>
