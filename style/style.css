@@ -1,6 +1,14 @@
 body {
   height: 100vh;
 }
+#js-notification {
+  font-size: x-large;
+  font-weight: bolder;
+  background-color: tomato;
+  color: wheat;
+  text-align: center;
+  padding: 10px;
+}
 #header {
   color: blueviolet;
   font-size: 32px;
