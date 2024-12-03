@@ -13,9 +13,14 @@
     <!-- Bonne pratique : il vaut mieux mettre ses propres pages de style après les lib, pour qu'elles prennent le pas ("le dernier qui a parlé a raison")-->
   </head>
   <body>
-    <div id="header">Meme Generator via <span id="js">js</span></div>
+    <div id="header">
+      Meme Generator <span id="via">via</span> <span id="js">js</span>
+    </div>
     <div id="navbar">
-      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <nav
+        class="navbar navbar-expand-sm navbar-dark bg-dark"
+        data-bs-theme="dark"
+      >
         <div class="container">
           <a class="navbar-brand" href="#">Navbar</a>
           <button
@@ -39,35 +44,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
               </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="dropdownId"
-                  data-bs-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  >Dropdown</a
-                >
-                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                  <a class="dropdown-item" href="#">Action 1</a>
-                  <a class="dropdown-item" href="#">Action 2</a>
-                </div>
-              </li>
             </ul>
-            <form class="d-flex my-2 my-lg-0">
-              <input
-                class="form-control me-sm-2"
-                type="text"
-                placeholder="Search"
-              />
-              <button
-                class="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >
-                Search
-              </button>
-            </form>
           </div>
         </div>
       </nav>
