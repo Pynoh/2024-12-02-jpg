@@ -1,3 +1,16 @@
 div {
   border: 1px solid black;
 }
+#header {
+  color: blueviolet;
+}
+#footer {
+  position: absolute;
+  bottom: 2px;
+  text-align: center;
+  width: 90%;
+  left: 5%;
+}
+.bold {
+  font-weight: bold;
+}
