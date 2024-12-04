@@ -6,15 +6,13 @@ function loadingDOM() {
   var victoryMan = jsnotif.children[0];
   victoryMan.style.fontStyle = "italic";
   victoryMan.style.color = "red";
-  var buttonHeader = document.querySelector("#header-button");
-  buttonHeader.addEventListener("click", function (evt) {
-    evt.stopPropagation();
-    console.log(evt);
-    console.log("Au secours");
-  });
-  document.querySelector("#header").addEventListener("click", function (evt) {
-    console.log(evt);
-    console.log("tout va bien");
-  });
+  //document.querySelector("#header-button").remove();
+  jsnotif.remove(); // on a bien chargé le document, on peut retirer la bannière
+  document
+    .querySelector("#header-button")
+    .addEventListener("click", function (evt) {
+      console.log("header button", evt);
+      console.log("tout va bien");
+    });
 }
 document.addEventListener("DOMContentLoaded", loadingDOM);
