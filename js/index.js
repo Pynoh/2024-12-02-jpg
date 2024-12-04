@@ -5,7 +5,7 @@ function loadingDOM() {
   document.querySelector("#js-notification").remove();
   document.querySelector("#header-button").remove();
   loadNavbarEvents();
-  loadEditorEvent();
+  //loadEditorEvent();
 }
 
 /**
@@ -21,3 +21,4 @@ function loadNavbarEvents() {
 }
 
 document.addEventListener("DOMContentLoaded", loadingDOM);
+var router = new Router();
