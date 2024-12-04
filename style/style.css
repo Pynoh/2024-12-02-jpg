@@ -56,3 +56,10 @@ div.cols > div input {
   width: 80px;
   text-align: center;
 }
+
+@media print {
+  #editor-right,
+  #navbar {
+    display: none;
+  }
+}
