@@ -5,6 +5,7 @@ function loadingDOM() {
   document.querySelector("#js-notification").remove();
   document.querySelector("#header-button").remove();
   loadNavbarEvents();
+  loadEditorEvent();
 }
 
 /**
@@ -14,9 +15,9 @@ function loadNavbarEvents() {
   document.querySelectorAll("nav a").forEach(function (elt, key) {
     elt.addEventListener("click", (evt) => {
       evt.preventDefault();
+      history.pushState(null, null, evt.target.href);
     });
   });
-  document.querySelectorAll("nav a").forEach();
 }
 
 document.addEventListener("DOMContentLoaded", loadingDOM);
