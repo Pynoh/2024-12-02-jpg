@@ -1,53 +1,48 @@
 var routes = [
   {
     name: "Thumbnail",
-    path: "/thumbnail",
+    path: /^\/thumbnail$/,
     url: "/pages/thumbnail/thumbnail.html",
   },
   {
     name: "Editor",
-    path: "/editor",
+    path: /^\/edit((\/)|(\/(?<id>\d+)))?$/,
     url: "/pages/editor/editor.html",
     loaderJs: loadEditorEvent,
   },
   {
     name: "Home",
-    path: "/",
+    path: /\/?/,
     url: "/pages/home/home.html",
   },
 ];
+
 /*
-    Besoins routeur
-        public -> sur this
-            +page actuelle (champ en lecture)
-            +changement de chemin (fonction)
-        privé -> en local de Router
-            +champ de route privé en écriture
-            +modif url
-            +modif contenu
-            +récupération du contenu de page depuis le réseau
+  Besoins routeur
+      public -> sur this
+          +page actuelle (champ en lecture)
+          +changement de chemin (fonction)
+      privé -> en local de Router
+          +champ de route privé en écriture
+          +modif url
+          +modif contenu
+          +récupération du contenu de page depuis le réseau
 */
-function Router(rootNode, rootFolderOfTemplates = "/pages") {
+function Router(rootNode) {
   /* définitions locales (internes) des propriétés et functions */
   var currentRoute = undefined;
   function changePathName(pathName) {
     history.pushState(null, null, pathName);
-    var routeObject = {};
-    routeObject.url = rootFolderOfTemplates;
-
-    switch (pathName) {
-      case "/thumbnail":
-        routeObject.url += "/thumbnail/thumbnail.html";
-        break;
-      case "/editor":
-        routeObject.url += "/editor/editor.html";
-        routeObject.loaderJs = loadEditorEvent;
-        break;
-      default:
-        routeObject.url += "/home/home.html";
-        break;
+    var m;
+    var route = routes.find((r) => {
+      m = r.path.exec(pathName);
+      return m !== null;
+    });
+    if (undefined !== route) {
+      route.params = m.groups;
     }
-    currentRoute = routeObject;
+    route.pathName = pathName;
+    currentRoute = route;
   }
   function getContentFromNetwork(routeObject) {
     var xhr = new XMLHttpRequest();
@@ -75,12 +70,13 @@ function Router(rootNode, rootFolderOfTemplates = "/pages") {
   /* définitions des accès extérieurs à l'instance */
   /**
    * getter de la route actuelle
-   * @returns {string} current pathname
+   * @returns {string} current pathName
    */
   this.getCurrentRoute = getCurrentRoute;
   function getCurrentRoute() {
     return currentRoute;
   }
+
   /**
    * Fonction de la navigation avec chargement du contenu
    * @param {string} pathName path to navigate (start with '/')
@@ -88,7 +84,12 @@ function Router(rootNode, rootFolderOfTemplates = "/pages") {
   this.navigate = navigate;
   function navigate(pathName = "/") {
     changePathName(pathName);
-    getContentFromNetwork(currentRoute);
+    if (undefined !== currentRoute.template) {
+      console.log("template déjà chargé");
+      loadContentInPage(currentRoute);
+    } else {
+      getContentFromNetwork(currentRoute);
+    }
   }
   navigate(location.pathname);
 }
