@@ -8,7 +8,7 @@ var routes = [
     name: "Editor",
     path: /^\/edit((\/)|(\/(?<id>\d+)))?$/,
     url: "/pages/editor/editor.html",
-    loaderJs: loadEditorEvent,
+    loaderJs: loadEditor,
   },
   {
     name: "Home",
@@ -54,7 +54,6 @@ function Router(rootNode) {
       if (xhr.status >= 400) {
         return console.log("erreur" + xhr.status);
       }
-      console.log(xhr.responseText);
       routeObject.template = xhr.responseText;
       loadContentInPage(routeObject);
     };
@@ -63,7 +62,7 @@ function Router(rootNode) {
   function loadContentInPage(routeObject) {
     rootNode.innerHTML = routeObject.template;
     if (typeof routeObject.loaderJs === "function") {
-      routeObject.loaderJs();
+      routeObject.loaderJs(currentRoute.params);
     }
   }
 

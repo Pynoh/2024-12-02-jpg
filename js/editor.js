@@ -1,3 +1,8 @@
+function loadEditor(params) {
+  console.log(params);
+  loadEditorEvent;
+}
+
 /**
  * Définit l'event de l'éditeur de memes
  */
