@@ -9,7 +9,7 @@
             +modif contenu
             +récupération du contenu de page depuis le réseau
 */
-function Router(rootFolderOfTemplates = "/pages") {
+function Router(rootNode, rootFolderOfTemplates = "/pages") {
   /* définitions locales (internes) des propriétés et functions */
   var currentRoute = location.pathname;
   function changePathName(pathName) {
@@ -27,7 +27,9 @@ function Router(rootFolderOfTemplates = "/pages") {
         console.log("erreur" + xhr.status);
       }
       console.log(xhr.responseText);
+      rootNode.innerHTML = xhr.responseText;
     };
+    xhr.send();
   }
   function loadContentInPage(eventLoader) {}
   /* définitions des accès extérieurs à l'instance */
@@ -58,7 +60,7 @@ function Router(rootFolderOfTemplates = "/pages") {
         url += "/home/home.html";
         break;
     }
-    getContentFromNetwork();
+    getContentFromNetwork(url);
     loadContentInPage();
   }
 }
