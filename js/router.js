@@ -1,8 +1,26 @@
+var routes = [
+  {
+    name: "Thumbnail",
+    path: "/thumbnail",
+    url: "/pages/thumbnail/thumbnail.html",
+  },
+  {
+    name: "Editor",
+    path: "/editor",
+    url: "/pages/editor/editor.html",
+    loaderJs: loadEditorEvent,
+  },
+  {
+    name: "Home",
+    path: "/",
+    url: "/pages/home/home.html",
+  },
+];
 /*
     Besoins routeur
         public -> sur this
             +page actuelle (champ en lecture)
-            + changement de chemin (fonction)
+            +changement de chemin (fonction)
         privé -> en local de Router
             +champ de route privé en écriture
             +modif url
