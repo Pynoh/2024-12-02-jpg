@@ -15,7 +15,7 @@ function loadNavbarEvents() {
   document.querySelectorAll("nav a").forEach(function (elt, key) {
     elt.addEventListener("click", (evt) => {
       evt.preventDefault();
-      history.pushState(null, null, evt.target.href);
+      router.navigate(evt.target.attributes.href.value);
     });
   });
 }

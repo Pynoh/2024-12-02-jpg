@@ -11,27 +11,49 @@
 */
 function Router(rootNode, rootFolderOfTemplates = "/pages") {
   /* définitions locales (internes) des propriétés et functions */
-  var currentRoute = location.pathname;
+  var currentRoute = undefined;
   function changePathName(pathName) {
     history.pushState(null, null, pathName);
-    currentRoute = location.pathname;
+    var routeObject = {};
+    routeObject.url = rootFolderOfTemplates;
+
+    switch (pathName) {
+      case "/thumbnail":
+        routeObject.url += "/thumbnail/thumbnail.html";
+        break;
+      case "/editor":
+        routeObject.url += "/editor/editor.html";
+        routeObject.loaderJs = loadEditorEvent;
+        break;
+      default:
+        routeObject.url += "/home/home.html";
+        break;
+    }
+    currentRoute = routeObject;
   }
-  function getContentFromNetwork(contentUrl) {
+  function getContentFromNetwork(routeObject) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", contentUrl);
+    xhr.open("GET", routeObject.url);
     xhr.onreadystatechange = function (evt) {
       if (xhr.readyState < XMLHttpRequest.DONE) {
         return;
       }
       if (xhr.status >= 400) {
-        console.log("erreur" + xhr.status);
+        return console.log("erreur" + xhr.status);
       }
       console.log(xhr.responseText);
-      rootNode.innerHTML = xhr.responseText;
+      routeObject.template = xhr.responseText;
+      loadContentInPage(routeObject);
     };
     xhr.send();
   }
-  function loadContentInPage(eventLoader) {}
+  function loadContentInPage(routeObject) {
+    rootNode.innerHTML = routeObject.template;
+    if (typeof routeObject.loaderJs === "function") {
+      routeObject.loaderJs();
+    }
+  }
+
   /* définitions des accès extérieurs à l'instance */
   /**
    * getter de la route actuelle
@@ -48,19 +70,7 @@ function Router(rootNode, rootFolderOfTemplates = "/pages") {
   this.navigate = navigate;
   function navigate(pathName = "/") {
     changePathName(pathName);
-    var url = rootFolderOfTemplates;
-    switch (pathName) {
-      case "/thumbnail":
-        url += "/thumbnail/thumbnail.html";
-        break;
-      case "/editor":
-        url += "/editor/editor.html";
-        break;
-      default:
-        url += "/home/home.html";
-        break;
-    }
-    getContentFromNetwork(url);
-    loadContentInPage();
+    getContentFromNetwork(currentRoute);
   }
+  navigate(location.pathname);
 }
